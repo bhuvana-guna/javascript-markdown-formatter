@@ -2,18 +2,18 @@
   "name": "js-markdown-formatter",
   "version": "1.0.1",
   "description": "a light weight markdown formatter",
-  "main": "index.js",
+  "main": "markdown-formatter.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "bhuvana",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/bhuvana-guna/javascript-markdown-formatter.git"
+    "url": "git+https://github.com/bhuvana-guna/js-markdown-formatter.git"
   },
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/bhuvana-guna/javascript-markdown-formatter/issues"
+    "url": "https://github.com/bhuvana-guna/js-markdown-formatter/issues"
   },
-  "homepage": "https://github.com/bhuvana-guna/javascript-markdown-formatter#readme"
+  "homepage": "https://github.com/bhuvana-guna/js-markdown-formatter#readme"
 }

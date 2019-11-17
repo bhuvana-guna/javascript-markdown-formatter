@@ -4,7 +4,7 @@
 MarkdownFormatter = (function() {
     
     let SPECIAL_CHAR_REGEX = new RegExp("[^|a-z\\\\s\\d]", 'gi');
-    let regexArray = [];
+    let regexArray = [],patterns = [], styles = [], patternTypes = [], styleTypes = [];
 	// formatter pattern configs
 	let MD_FORMATTER_CONFIG = [
         {
@@ -54,10 +54,9 @@ MarkdownFormatter = (function() {
 		},
     ];
     
-    //combines default config and user config.
-    function setCustomMarkdownRegex(regexArray){
-        regexArray = regexArray;
-
+    //combines default config and user config. Overwrites the default config if same type is passed.
+    function setCustomMarkdownRegex(userConfig){
+        regexArray = userConfig;
         // prefer user configs
         for(var i = 0; i < MD_FORMATTER_CONFIG.length; i++){
             for(var j =0; j < regexArray.length; j++){
@@ -69,17 +68,11 @@ MarkdownFormatter = (function() {
             }
         }
         regexArray = MD_FORMATTER_CONFIG.concat(regexArray);
-        
     }
 
-	function constructor(text) {
+    //initilizes the necessary variables.
+	function constructor() {
 		regexArray = MD_FORMATTER_CONFIG.concat(regexArray);        
-
-		// extracted regex
-		patterns = [];
-		styles = [];
-		patternTypes = []
-		styleTypes = [];
 
 		for (var i = 0; i < regexArray.length; i++) {
 			let pattern = regexArray[i].pattern;
@@ -96,14 +89,14 @@ MarkdownFormatter = (function() {
             }else if(patternType == "asymmetric"){                
                 pattern = pattern[0].replace(SPECIAL_CHAR_REGEX, "\\$&");    
                 let regexForm = '';
-                p = regexArray[i].pattern[0];
-                for (var j = 0; j < p.length; j++) {
+                let p = regexArray[i].pattern[0];
+                for (let j = 0; j < p.length; j++) {
                     regexForm = regexForm + "\\" + p[j];
                 }
                 // create all group regex
 				let part = regexForm.length / groups;
 				let regex = "";
-				for (var j = 0; j < groups; j++) {
+				for (let j = 0; j < groups; j++) {
 					let group = regexForm.substring(part * j, part * (j + 1));
 					let firstHalf = group.substring(0, group.length / 2);
 					let secondHalf = group.substring(group.length / 2, group.length);
@@ -120,7 +113,8 @@ MarkdownFormatter = (function() {
 	}
 
 	function render(text) {
-        constructor(text);
+        constructor();
+        //parses the text for all the style types.
 		for (var i = 0; i <= styleTypes.length - 1; i++) {		
 			text = parseText(text, styleTypes[i], styles[i], patterns[i], patternTypes[i]);
 		}
@@ -128,7 +122,7 @@ MarkdownFormatter = (function() {
 	}
 
 	function parseText(text, type, styles, pattern, patternType){
-        let first="true";
+        let first="true", parsed;
 		while ((parsed = pattern.exec(text)) !== null) {
 			if(parsed[1] === undefined){
 				continue;

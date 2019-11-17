@@ -2,33 +2,23 @@
 
 A **Customizable Markdown Library** for rendering Markdown in Adaptive Cards.
 
-Custom markdown rules for your application is possible now without any regex learning. Just follow the simple guidelines shown bellow.   
-
-**[Demo](#demo)**
+Custom markdown rules for your application is possible now without any regex learning. 
 
 ## Getting started
 
 To use, add the markdown-formatter.js to your html
 ```
-<script src="https://unpkg.com/markdown-formatter/dist/markdown-formatter.js"></script>
+<script src="https://unpkg.com/js-markdown-formatter"></script>
 ```
-Install the node module:
-
-`$ yarn add js-markdown-formatter`
-
-or with npm:
-
-`$ npm install js-markdown-formatter`
-
 Then see **[Usage](#Usage)** for futher details
 
 ## Runnning the example code
 
-You can check the example in the 
+Check these files for the sample usage.
 
-example.html
-
-customRegexExample.html
+**example.html** - has the basic usage with adaptive cards.
+ 
+**customRegexExample.html** - check this file for passing custom regex.
 
 ## Markdown Patterns Usage
 
@@ -87,7 +77,7 @@ To replace or to be added with default config.
 ## Usage
 
 ```
-<script src="https://unpkg.com/markdown-formatter/dist/markdown-formatter.js"></script>
+<script src="https://unpkg.com/js-markdown-formatter"></script>
 
 // use it in onProcessMarkdown of adaptivecard instance.
 adaptiveCard.constructor.onProcessMarkdown = function(text, result) {
